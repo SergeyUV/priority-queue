@@ -11,11 +11,13 @@ class Node {
 	appendChild(node) {
 		if(this.left == null){
 			this.left = node;
+			node.parent = this;
 			return;	
 		}
 
 		if(this.right == null){
 			this.right = node;
+			node.parent = this;
 			return;
 		}
 	}
@@ -39,11 +41,27 @@ class Node {
 	}
 
 	remove() {
-
+		if(this.parent == null){return;}
+		this.parent.removeChild(this);
 	}
 
 	swapWithParent() {
+		if(this.parent == null){return;}
+		console.log('call swap');
+		const was_parent = this.parent;
+		this.parent = was_parent.parent;
+		was_parent.parent = this;
 		
+		// if(was_parent.left == this){
+		// 	console.log(was_parent.right.parent);
+		//  	was_parent.right.parent = this;
+		// } else if(was_parent.right == this){
+		// 	console.log(was_parent.left.parent);
+		//  	was_parent.left.parent = this;
+		// }
+		
+		
+
 	}
 }
 
