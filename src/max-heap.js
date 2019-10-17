@@ -37,6 +37,10 @@ class MaxHeap {
 
 	insertNode(node) {
 		
+		if(!this.root){
+			this.root = node;
+		}
+
 	}
 
 	shiftNodeUp(node) {
