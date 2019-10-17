@@ -21,19 +21,21 @@ class Node {
 	}
 
 	removeChild(node) {
+		let found = false;
+		
 		if(this.left == node){
 			this.left = null;
 			node.parent = null;
-			return;	
+			found = true;	
 		}
 
 		if(this.right == node){
 			this.right = null;
 			node.parent = null;
-			return;
+			found = true;
 		}
 		
-		throw new Error(' Node is not a child of this node');
+		if (! found) {throw new Error(' Node is not a child of this node');}
 	}
 
 	remove() {
