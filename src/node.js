@@ -1,6 +1,7 @@
 class Node {
 	
 	constructor(data, priority) {
+
 		this.data = data;
 		this.priority = priority;
 		this.parent = null;
@@ -9,6 +10,7 @@ class Node {
 	}
 
 	appendChild(node) {
+
 		if(this.left == null){
 			this.left = node;
 			node.parent = this;
@@ -23,6 +25,7 @@ class Node {
 	}
 
 	removeChild(node) {
+
 		let found = false;
 		
 		if(this.left == node){
@@ -41,28 +44,64 @@ class Node {
 	}
 
 	remove() {
+
 		if(this.parent == null){return;}
 		this.parent.removeChild(this);
 	}
 
 	swapWithParent() {
+
 		if(this.parent == null){return;}
-		console.log('call swap');
-		const was_parent = this.parent;
+		
+		let was_parent = this.parent;
 		this.parent = was_parent.parent;
+		
+		if(was_parent.parent){
+			if(was_parent.parent.left == was_parent){
+				was_parent.parent.left = this;
+			}
+			else if (was_parent.parent.right == was_parent){
+				was_parent.parent.right = this;
+			}
+		}
+		
 		was_parent.parent = this;
 		
-		// if(was_parent.left == this){
-		// 	console.log(was_parent.right.parent);
-		//  	was_parent.right.parent = this;
-		// } else if(was_parent.right == this){
-		// 	console.log(was_parent.left.parent);
-		//  	was_parent.left.parent = this;
-		// }
-		
-		
-
+		let tmp;
+		if(was_parent.left == this){
+			if(was_parent.right) {
+				was_parent.right.parent = this;	  
+			}
+			was_parent.left = this.left;
+			if(was_parent.left){
+				was_parent.left.parent = was_parent;
+			}
+			tmp = this.right;
+			this.right = was_parent.right;
+			was_parent.right = tmp;
+			if(was_parent.right){
+				was_parent.right.parent = was_parent;
+			}
+			this.left = was_parent;
+		} 
+		else if(was_parent.right == this){
+			if(was_parent.left) {
+				was_parent.left.parent = this;
+			}
+			was_parent.right = this.right;
+			if(was_parent.right){
+				was_parent.right.parent = was_parent;
+			}
+			tmp = this.left;
+			this.left = was_parent.left;
+			was_parent.left = tmp;
+			if(was_parent.left){
+				was_parent.left.parent = was_parent;
+			}
+			this.right = was_parent;
+		}
 	}
+
 }
 
 module.exports = Node;
