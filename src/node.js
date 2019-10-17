@@ -16,11 +16,24 @@ class Node {
 
 		if(this.right == null){
 			this.right = node;
+			return;
 		}
 	}
 
 	removeChild(node) {
+		if(this.left == node){
+			this.left = null;
+			node.parent = null;
+			return;	
+		}
 
+		if(this.right == node){
+			this.right = null;
+			node.parent = null;
+			return;
+		}
+		
+		throw new Error(' Node is not a child of this node');
 	}
 
 	remove() {
