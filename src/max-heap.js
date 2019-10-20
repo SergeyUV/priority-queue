@@ -28,8 +28,8 @@ class MaxHeap {
 	}
 
 	detachRoot() {
-		console.log('parentnodes');
-		console.log(this.parentNodes);
+		//console.log('parentnodes');
+		//console.log(this.parentNodes);
 		if(!this.root){
 			return;
 		}
@@ -63,8 +63,8 @@ class MaxHeap {
 		this.root.right.parent = this.root;
 		
 
-		console.log('parentnodes');
-		console.log(this.parentNodes);
+		//console.log('parentnodes');
+		//console.log(this.parentNodes);
 
 	}
 
